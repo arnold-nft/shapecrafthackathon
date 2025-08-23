@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Demo.ShapeCraftAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(
+    builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
 builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddCors(options =>
@@ -42,6 +50,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  
 
 var app = builder.Build();
+
+app.UseIpRateLimiting();
 
 app.UseCors("AllowAllOrigins");
 
