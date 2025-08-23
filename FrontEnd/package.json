@@ -81,5 +81,8 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.0",
     "typescript": "^5"
+  },
+  "volta": {
+    "node": "22.15.0"
   }
 }
