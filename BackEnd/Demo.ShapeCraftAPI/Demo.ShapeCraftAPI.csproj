@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>ccdf09a2-e039-46bb-8e79-eb14e8d394ab</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\ShapeCraft.Core.csproj" />
+    <ProjectReference Include="..\ManifoldSync\ShapeCraft.ManifoldSync.csproj" />
+    <ProjectReference Include="..\OpenseaSync\ShapeCraft.OpenseaSync.csproj" />
+    <ProjectReference Include="..\TransientLabsSync\ShapeCraft.TransientLabsSync.csproj" />
+  </ItemGroup>
+
+</Project>
