@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShapeCraft.ManifoldSync;
 using ShapeCraft.OpenseaSync;
 using ShapeCraft.OpenseaSync.DependencyInjection;
 using System;
@@ -25,6 +26,8 @@ namespace Demo.ShapeCraftHackathon.DependencyInjection
             services.AddOpenSea(configuration);
 
             services.AddTransient<OpenSeaOrchestrator>();
+
+            services.AddTransient<ManifoldOrchestrator>();
 
 
             return services;

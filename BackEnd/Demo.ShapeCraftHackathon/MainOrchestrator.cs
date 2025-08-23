@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using ShapeCraft.ManifoldSync;
 using ShapeCraft.OpenseaSync;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace Demo.ShapeCraftHackathon
     {
 
         private readonly OpenSeaOrchestrator _openSeaOrchestrator;
+        private readonly ManifoldOrchestrator _manifoldOrchestrator;
 
-        public MainOrchestrator(OpenSeaOrchestrator openSeaOrchestrator)
+        public MainOrchestrator(OpenSeaOrchestrator openSeaOrchestrator, ManifoldOrchestrator manifoldOrchestrator)
         {
             _openSeaOrchestrator = openSeaOrchestrator;
+            _manifoldOrchestrator = manifoldOrchestrator;
         }
 
         [Function(nameof(MainOrchestrator))]
@@ -28,6 +31,8 @@ namespace Demo.ShapeCraftHackathon
             logger.LogInformation("MainOrchestrator function triggered locally");
 
             await _openSeaOrchestrator.RunAsync();
+
+            await _manifoldOrchestrator.RunAsync();
 
             logger.LogInformation("MainOrchestrator executed successfully!");
         }
