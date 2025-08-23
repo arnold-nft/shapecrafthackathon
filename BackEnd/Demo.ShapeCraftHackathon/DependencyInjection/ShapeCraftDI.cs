@@ -2,8 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShapeCraft.ManifoldSync;
+using ShapeCraft.MessageQueue.DependencyInjection;
 using ShapeCraft.OpenseaSync;
 using ShapeCraft.OpenseaSync.DependencyInjection;
+using ShapeCraft.Storage.DependencyInjection;
 using ShapeCraft.TransientLabsSync;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,10 @@ namespace Demo.ShapeCraftHackathon.DependencyInjection
             services.AddTransient<ManifoldOrchestrator>();
 
             services.AddTransient<TransientLabsOrchestrator>();
+
+            services.AddMessageQueues(configuration);
+
+            services.AddStorage(configuration);
 
 
             return services;
