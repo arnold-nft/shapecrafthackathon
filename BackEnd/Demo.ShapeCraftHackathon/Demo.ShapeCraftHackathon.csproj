@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ManifoldSync\ShapeCraft.ManifoldSync.csproj" />
     <ProjectReference Include="..\OpenseaSeaSync\ShapeCraft.OpenseaSync.csproj" />
+    <ProjectReference Include="..\OpenseaSync\ShapeCraft.OpenseaSync.csproj" />
     <ProjectReference Include="..\TransientLabsSync\ShapeCraft.TransientLabsSync.csproj" />
   </ItemGroup>
 
