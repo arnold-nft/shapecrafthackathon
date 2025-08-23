@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core\ShapeCraft.Core.csproj" />
+    <ProjectReference Include="..\ShapeCraft.MessageQueue\ShapeCraft.MessageQueue.csproj" />
+    <ProjectReference Include="..\ShapeCraft.Storage\ShapeCraft.Storage.csproj" />
+  </ItemGroup>
+
 </Project>
