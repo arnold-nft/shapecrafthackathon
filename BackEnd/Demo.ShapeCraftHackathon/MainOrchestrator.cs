@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ShapeCraft.ManifoldSync;
 using ShapeCraft.OpenseaSync;
+using ShapeCraft.TransientLabsSync;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,13 @@ namespace Demo.ShapeCraftHackathon
 
         private readonly OpenSeaOrchestrator _openSeaOrchestrator;
         private readonly ManifoldOrchestrator _manifoldOrchestrator;
+        private readonly TransientLabsOrchestrator _transientLabsOrchestrator;
 
-        public MainOrchestrator(OpenSeaOrchestrator openSeaOrchestrator, ManifoldOrchestrator manifoldOrchestrator)
+        public MainOrchestrator(OpenSeaOrchestrator openSeaOrchestrator, ManifoldOrchestrator manifoldOrchestrator, TransientLabsOrchestrator transientLabsOrchestrator)
         {
             _openSeaOrchestrator = openSeaOrchestrator;
             _manifoldOrchestrator = manifoldOrchestrator;
+            _transientLabsOrchestrator = transientLabsOrchestrator;
         }
 
         [Function(nameof(MainOrchestrator))]
@@ -33,6 +36,8 @@ namespace Demo.ShapeCraftHackathon
             await _openSeaOrchestrator.RunAsync();
 
             await _manifoldOrchestrator.RunAsync();
+
+            await _transientLabsOrchestrator.RunAsync();
 
             logger.LogInformation("MainOrchestrator executed successfully!");
         }

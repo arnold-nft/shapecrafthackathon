@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ShapeCraft.ManifoldSync;
 using ShapeCraft.OpenseaSync;
 using ShapeCraft.OpenseaSync.DependencyInjection;
+using ShapeCraft.TransientLabsSync;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace Demo.ShapeCraftHackathon.DependencyInjection
             services.AddTransient<OpenSeaOrchestrator>();
 
             services.AddTransient<ManifoldOrchestrator>();
+
+            services.AddTransient<TransientLabsOrchestrator>();
 
 
             return services;
