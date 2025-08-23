@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.ShapeCraftAPI.Controllers
@@ -6,6 +7,7 @@ namespace Demo.ShapeCraftAPI.Controllers
     [Route("[controller]")]
     public class TestController : ControllerBase
     {
+        [Authorize]
         [HttpGet("GetData")]
         public async Task<IActionResult> GetData()
         {
