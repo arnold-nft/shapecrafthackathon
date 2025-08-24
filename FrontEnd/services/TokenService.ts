@@ -3,7 +3,7 @@ import { ITokenService } from './contracts/ITokenService';
 export class TokenService implements ITokenService {
   async getToken(userAddress: string): Promise<string | undefined> {
     try {
-      const response = await fetch('http://localhost:5248/token/generate', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}token/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
