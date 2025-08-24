@@ -23,7 +23,7 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Publish app
-        working-directory: ./backend/Demo.ShapeCraftApi
+        working-directory: ./backend/Demo.ShapeCraftAPI
         run: dotnet publish -c Release -o ../../publish_output
 
       - name: Upload artifact for deployment
@@ -55,3 +55,4 @@ jobs:
           app-name: 'shapecraftbackend'
           slot-name: 'Production'
           package: ./publish_output
+
