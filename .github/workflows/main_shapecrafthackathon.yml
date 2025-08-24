@@ -18,54 +18,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify repo layout (debug)
-        run: |
-          pwd
-          ls -la
-          ls -la frontend || true
-
-      - name: Set up Node.js
+      - name: Set up Node.js version
         uses: actions/setup-node@v4
         with:
-          # Align with your Volta config; 22.x is fine for Next 15/React 19
-          node-version: '22.x'
-
-      # Optional, resilient npm cache (won't cause failures)
-      - name: Cache npm
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: FrontEnd/package-lock.json
 
       - name: Install dependencies
-        working-directory: ./frontend
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci || npm install
-          else
-            npm install
-          fi
+        working-directory: ./FrontEnd
+        run: npm ci
 
       - name: Build Next.js app
-        working-directory: ./frontend
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096
+        working-directory: ./FrontEnd
         run: npm run build
 
       - name: Prepare deployment package
         run: |
-          rm -rf publish
           mkdir -p publish
-          cp -r frontend/.next publish/.next
-          cp -r frontend/public publish/public || mkdir -p publish/public
-          cp frontend/package.json publish/
-          # include lockfile so Azure can install deps
-          [ -f frontend/package-lock.json ] && cp frontend/package-lock.json publish/ || true
-          cp frontend/next.config.js publish/ || true
-          cp frontend/tsconfig.json publish/ || true
-          cp frontend/.env.production publish/.env.production || true
+          cp -r FrontEnd/.next publish/.next
+          cp -r FrontEnd/public publish/public
+          cp FrontEnd/package.json publish/
+          cp FrontEnd/next.config.js publish/ || true
+          cp FrontEnd/tsconfig.json publish/ || true
+          cp FrontEnd/.env.production publish/.env.production || true
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
