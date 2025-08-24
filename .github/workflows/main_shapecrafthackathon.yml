@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./FrontEnd
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build Next.js app
         working-directory: ./FrontEnd
@@ -73,3 +73,4 @@ jobs:
           app-name: 'shapecrafthackathon'
           slot-name: 'Production'
           package: ./publish
+
