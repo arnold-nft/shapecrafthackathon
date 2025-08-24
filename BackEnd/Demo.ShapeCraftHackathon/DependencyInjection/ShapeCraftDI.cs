@@ -1,0 +1,52 @@
+﻿using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using ShapeCraft.AzureAI.DependencyInjection;
+using ShapeCraft.AzureAISearch.DependencyInjection;
+using ShapeCraft.ManifoldSync;
+using ShapeCraft.MessageQueue.DependencyInjection;
+using ShapeCraft.OpenseaSync;
+using ShapeCraft.OpenseaSync.DependencyInjection;
+using ShapeCraft.Storage.DependencyInjection;
+using ShapeCraft.TransientLabsSync;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Demo.ShapeCraftHackathon.DependencyInjection
+{
+    public static class ShapeCraftDI
+    {
+
+        public static IServiceCollection AddShapeCraftDI(
+           this IServiceCollection services,
+           IConfiguration configuration
+       )
+        {
+            ArgumentNullException.ThrowIfNull(services);
+            services.ConfigureFunctionsApplicationInsights();
+
+            services.AddOpenSea(configuration);
+
+            services.AddTransient<OpenSeaOrchestrator>();
+
+            services.AddTransient<ManifoldOrchestrator>();
+
+            services.AddTransient<TransientLabsOrchestrator>();
+
+            services.AddTransient<AzureAIOrchestrator>();
+
+            services.AddMessageQueues(configuration);
+
+            services.AddStorage(configuration);
+
+            services.AddAzureSearch(configuration);
+
+            services.AddAzureOpenAI(configuration);
+
+            return services;
+        }
+    }
+}
