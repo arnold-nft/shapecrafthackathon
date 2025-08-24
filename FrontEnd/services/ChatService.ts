@@ -8,7 +8,7 @@ export class ChatService implements IChatService {
     }
 
     const response = await fetch(
-      `http://localhost:5248/chat/generate?question=${encodeURIComponent(question)}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}chat/generate?question=${encodeURIComponent(question)}`,
       {
         method: 'GET',
         headers: {

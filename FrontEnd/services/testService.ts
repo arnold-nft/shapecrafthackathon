@@ -5,7 +5,7 @@ export class TestService {
             return;
         }
 
-        const response = await fetch('http://localhost:5248/test/GetData', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}test/GetData`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${jwtToken}`,
