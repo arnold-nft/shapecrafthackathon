@@ -48,8 +48,8 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-background flex min-h-screen flex-col font-[family-name:var(--font-geist-sans)]">
-      <div className="flex-1 overflow-y-auto px-40 py-6">
+    <div className="flex min-h-0 flex-1 flex-col">
+      <div className="flex-1 overflow-y-auto px-40">
         {messages.map((msg, idx) => (
           <div
             key={idx}
