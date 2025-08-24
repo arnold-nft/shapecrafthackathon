@@ -23,21 +23,23 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
+        working-directory: ./frontend
         run: npm install
 
       - name: Build Next.js app
+        working-directory: ./frontend
         run: npm run build
 
       - name: Prepare deployment package
         run: |
           mkdir -p publish
-          cp -r .next publish/.next
-          cp -r public publish/public
-          cp package.json publish/
-          cp next.config.js publish/ || true
-          cp -r node_modules publish/node_modules || echo "No node_modules to copy"
-          cp tsconfig.json publish/ || true
-          cp .env.production publish/.env.production || true
+          cp -r frontend/.next publish/.next
+          cp -r frontend/public publish/public
+          cp frontend/package.json publish/
+          cp frontend/next.config.js publish/ || true
+          cp -r frontend/node_modules publish/node_modules || echo "No node_modules to copy"
+          cp frontend/tsconfig.json publish/ || true
+          cp frontend/.env.production publish/.env.production || true
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -69,4 +71,3 @@ jobs:
           app-name: 'shapecrafthackathon'
           slot-name: 'Production'
           package: ./publish
-
