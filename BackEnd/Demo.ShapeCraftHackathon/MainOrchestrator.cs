@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using ShapeCraft.AzureAI;
 using ShapeCraft.ManifoldSync;
 using ShapeCraft.OpenseaSync;
 using ShapeCraft.TransientLabsSync;
@@ -17,12 +18,14 @@ namespace Demo.ShapeCraftHackathon
         private readonly OpenSeaOrchestrator _openSeaOrchestrator;
         private readonly ManifoldOrchestrator _manifoldOrchestrator;
         private readonly TransientLabsOrchestrator _transientLabsOrchestrator;
+        private readonly AzureAIOrchestrator _azureAIOrchestrator;
 
-        public MainOrchestrator(OpenSeaOrchestrator openSeaOrchestrator, ManifoldOrchestrator manifoldOrchestrator, TransientLabsOrchestrator transientLabsOrchestrator)
+        public MainOrchestrator(OpenSeaOrchestrator openSeaOrchestrator, ManifoldOrchestrator manifoldOrchestrator, TransientLabsOrchestrator transientLabsOrchestrator, AzureAIOrchestrator azureAIOrchestrator)
         {
             _openSeaOrchestrator = openSeaOrchestrator;
             _manifoldOrchestrator = manifoldOrchestrator;
             _transientLabsOrchestrator = transientLabsOrchestrator;
+            _azureAIOrchestrator = azureAIOrchestrator;
         }
 
         [Function(nameof(MainOrchestrator))]
@@ -38,6 +41,8 @@ namespace Demo.ShapeCraftHackathon
             await _manifoldOrchestrator.RunAsync();
 
             await _transientLabsOrchestrator.RunAsync();
+
+            await _azureAIOrchestrator.RunAsync();
 
             logger.LogInformation("MainOrchestrator executed successfully!");
         }

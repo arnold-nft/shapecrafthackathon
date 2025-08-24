@@ -1,6 +1,8 @@
 ﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ShapeCraft.AzureAI.DependencyInjection;
+using ShapeCraft.AzureAISearch.DependencyInjection;
 using ShapeCraft.ManifoldSync;
 using ShapeCraft.MessageQueue.DependencyInjection;
 using ShapeCraft.OpenseaSync;
@@ -34,10 +36,15 @@ namespace Demo.ShapeCraftHackathon.DependencyInjection
 
             services.AddTransient<TransientLabsOrchestrator>();
 
+            services.AddTransient<AzureAIOrchestrator>();
+
             services.AddMessageQueues(configuration);
 
             services.AddStorage(configuration);
 
+            services.AddAzureSearch(configuration);
+
+            services.AddAzureOpenAI(configuration);
 
             return services;
         }
