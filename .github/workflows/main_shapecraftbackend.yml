@@ -1,5 +1,9 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - shapecraftbackend
 
+permissions:
+  id-token: write
+  contents: read
+
 on:
   push:
     branches:
@@ -53,4 +57,5 @@ jobs:
           app-name: 'shapecraftbackend'
           slot-name: 'Production'
           package: ${{env.DOTNET_ROOT}}/myapp
+
 
