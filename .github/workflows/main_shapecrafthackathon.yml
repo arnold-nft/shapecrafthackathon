@@ -29,6 +29,10 @@ jobs:
         working-directory: ./FrontEnd
         run: npm ci --legacy-peer-deps
 
+      - name: Rebuild native modules for Linux
+        working-directory: ./FrontEnd
+        run: npm rebuild lightningcss --force
+
       - name: Build Next.js app
         working-directory: ./FrontEnd
         run: npm run build
@@ -73,4 +77,5 @@ jobs:
           app-name: 'shapecrafthackathon'
           slot-name: 'Production'
           package: ./publish
+
 
