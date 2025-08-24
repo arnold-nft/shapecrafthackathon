@@ -1,12 +1,11 @@
-﻿using ShapeCraft.ManifoldSync;
+﻿using ShapeCraft.AzureAI.DependencyInjection;
+using ShapeCraft.AzureAISearch.DependencyInjection;
+using ShapeCraft.ManifoldSync;
+using ShapeCraft.MessageQueue.DependencyInjection;
 using ShapeCraft.OpenseaSync;
 using ShapeCraft.OpenseaSync.DependencyInjection;
+using ShapeCraft.Storage.DependencyInjection;
 using ShapeCraft.TransientLabsSync;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Demo.ShapeCraftHackathon.DependencyInjection
 {
@@ -22,8 +21,19 @@ namespace Demo.ShapeCraftHackathon.DependencyInjection
 
             services.AddOpenSea(configuration);
 
+            services.AddTransient<OpenSeaOrchestrator>();
 
+            services.AddTransient<ManifoldOrchestrator>();
 
+            services.AddTransient<TransientLabsOrchestrator>();
+
+            services.AddMessageQueues(configuration);
+
+            services.AddStorage(configuration);
+
+            services.AddAzureSearch(configuration);
+
+            services.AddAzureOpenAI(configuration);
 
             return services;
         }

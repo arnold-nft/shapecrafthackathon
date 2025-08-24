@@ -18,8 +18,6 @@ namespace ShapeCraft.AzureAISearch.DependencyInjection
                });
 
 
-            services.AddSingleton<ISearchIndexService, SearchIndexService>();
-
             services.AddSingleton<IVectorSearchService, VectorSearchService>();
 
             services.AddSingleton<IRagChatService, RagChatService>();

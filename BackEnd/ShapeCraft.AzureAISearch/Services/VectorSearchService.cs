@@ -3,6 +3,7 @@ using Azure.Core;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Models;
+using ShapeCraft.AzureAISearch.Models;
 using ShapeCraft.AzureAISearch.Services.Contracts;
 using ShapeCraft.Core.Options;
 

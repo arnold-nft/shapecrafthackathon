@@ -1,12 +1,11 @@
 using AspNetCoreRateLimit;
 using Demo.ShapeCraftAPI.Services;
+using Demo.ShapeCraftHackathon.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 
@@ -17,6 +16,7 @@ builder.Services.AddInMemoryRateLimiting();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddShapeCraftDI(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {

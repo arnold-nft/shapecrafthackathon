@@ -1,4 +1,5 @@
 ﻿using ShapeCraft.AzureAI.Services.Contracts;
+using ShapeCraft.AzureAISearch.Models;
 using ShapeCraft.AzureAISearch.Services.Contracts;
 using System;
 using System.Collections.Generic;

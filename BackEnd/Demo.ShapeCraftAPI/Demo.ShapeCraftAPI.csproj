@@ -16,6 +16,8 @@
     <ProjectReference Include="..\Core\ShapeCraft.Core.csproj" />
     <ProjectReference Include="..\ManifoldSync\ShapeCraft.ManifoldSync.csproj" />
     <ProjectReference Include="..\OpenseaSync\ShapeCraft.OpenseaSync.csproj" />
+    <ProjectReference Include="..\ShapeCraft.AzureAISearch\ShapeCraft.AzureAISearch.csproj" />
+    <ProjectReference Include="..\ShapeCraft.AzureAI\ShapeCraft.AzureAI.csproj" />
     <ProjectReference Include="..\TransientLabsSync\ShapeCraft.TransientLabsSync.csproj" />
   </ItemGroup>
 

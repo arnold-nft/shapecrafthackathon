@@ -28,14 +28,20 @@ export class TestService {
         if (!token) {
             console.error("No token available.");
             return;
-        }
+      }
+      
+      const question = 'What are the fees when I am buying an azuki?';
 
-        const response = await fetch('http://localhost:5248/test/GetData', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `http://localhost:5248/chat/generate?question=${encodeURIComponent(question)}`,
+          {
+            //const response = await fetch('http://localhost:5248/test/GetData', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
             console.error(`Failed to fetch data: ${response.statusText}`);
