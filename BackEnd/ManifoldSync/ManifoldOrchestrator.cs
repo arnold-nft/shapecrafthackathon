@@ -1,6 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using ShapeCraft.ManifoldSync.Data;
+using ShapeCraft.MessageQueue.Models;
+using ShapeCraft.MessageQueue.Services.Contracts;
+using ShapeCraft.Storage.Services.Contracts;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ShapeCraft.ManifoldSync
@@ -30,10 +34,14 @@ namespace ShapeCraft.ManifoldSync
          */
 
         private readonly ILogger<ManifoldOrchestrator> _logger;
+        private readonly IBlobService _blobService;
+        private readonly IMessageQueueService _messageQueueService;
 
-        public ManifoldOrchestrator(ILogger<ManifoldOrchestrator> logger)
+        public ManifoldOrchestrator(ILogger<ManifoldOrchestrator> logger, IMessageQueueService messageQueueService, IBlobService blobService)
         {
             _logger = logger;
+            _blobService = blobService;
+            _messageQueueService = messageQueueService;
         }
 
         public async Task RunAsync()
@@ -43,11 +51,27 @@ namespace ShapeCraft.ManifoldSync
             foreach (var content in ManifoldTrainingData.SmallContentChunks)
             {
                 _logger.LogInformation("Processing small manifold content");
+
+                //storage explorer upload
+                var uri = await _blobService.UploadItemAsync(content, $"manifold-{Guid.NewGuid()}");
+
+                _logger.LogInformation("Put message on Service bus");
+                //put message on bus
+                var message = new QueueMessage(uri.ToString(), DateTime.UtcNow);
+                await _messageQueueService.SendMessageAsync(JsonSerializer.Serialize(message));
             }
 
             foreach (var content in ManifoldTrainingData.BigContentChunks)
             {
                 _logger.LogInformation("Processing big manifold content");
+
+                //storage explorer upload
+                var uri = await _blobService.UploadItemAsync(content, $"manifold-{Guid.NewGuid()}");
+
+                _logger.LogInformation("Put message on Service bus");
+                //put message on bus
+                var message = new QueueMessage(uri.ToString(), DateTime.UtcNow);
+                await _messageQueueService.SendMessageAsync(JsonSerializer.Serialize(message));
             }
 
             _logger.LogInformation("Finished ingesting Manifold data.");
