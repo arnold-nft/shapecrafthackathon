@@ -88,7 +88,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <div className="bg-background min-h-screen font-[family-name:var(--font-geist-sans)]">
+          <div className="bg-background flex min-h-screen flex-col font-[family-name:var(--font-geist-sans)]">
             <header className="border-b">
               <div className="container mx-auto flex h-16 items-center justify-between px-20">
                 <Link href="/" className="flex items-center">
@@ -101,7 +101,7 @@ export default function RootLayout({
               </div>
             </header>
 
-            <main className="container mx-auto px-4 py-8">{children}</main>
+            <main className="container mx-auto flex flex-1 flex-col px-4 py-8">{children}</main>
 
             <footer className="border-t py-6 md:py-0">
               <div className="container mx-auto flex items-center justify-between gap-4 px-20 sm:h-16">
