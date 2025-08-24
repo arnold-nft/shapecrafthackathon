@@ -18,11 +18,12 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddShapeCraftDI(builder.Configuration);
 
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", policy =>
+    options.AddPolicy("shapefrontend", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://shapecrafthackathon.vercel.app")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -69,7 +70,9 @@ app.Use(async (context, next) =>
     }
 });
 
-app.UseCors("AllowAllOrigins");
+app.UseRouting();
+
+app.UseCors("shapefrontend");
 
 app.UseHttpsRedirection();
 
