@@ -93,11 +93,15 @@ Challenges & improvements 🚧
 * Limited time for frontend polish and gamification features
 * Future ideas:
 
-  * Faucet integration to help people get testnet ETH quickly
-  * Ensure user payed for the requests
-  * NFT rewards + medal system
-  * Leaderboard for most active users
-  * Advanced UI styling + UX improvements
+  * **Faucet integration** to help people get testnet ETH quickly
+  * Ensure user **payed** for the **requests** (small fee for 100 requests)
+  * **Train** the AI with much more data
+  * Let the Azure Train function run on a **VM**
+  * **Train multiple indexes** with data
+  * The whole back end was designed to have the ability scale a **production level (opensea chat) real usable chatbot** (reason for the message queue en storage). **Chatbot could be enrolled on the websites of Opensea, Manifold, Transient Labs, ... in the future**
+  * **NFT rewards** + medal system
+  * **Leaderboard** for most active users
+  * Advanced **UI styling** + **UX improvements** (still some styling things I am not happy with)
 
 ---
 
