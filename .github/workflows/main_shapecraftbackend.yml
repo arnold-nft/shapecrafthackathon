@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - shapecraftbackend
+name: Build and Deploy ASP.Net Core App to Azure Web App - shapecraftbackend
 
 permissions:
   id-token: write
@@ -14,9 +14,10 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
