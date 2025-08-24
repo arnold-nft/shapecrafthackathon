@@ -53,9 +53,23 @@ var app = builder.Build();
 
 app.UseIpRateLimiting();
 
-app.UseCors("AllowAllOrigins");
+app.Use(async (context, next) =>
+{
+    await next.Invoke();
 
-// Configure the HTTP request pipeline.
+    if (context.Response.StatusCode == 429)
+    {
+        context.Response.ContentType = "application/json";
+        var response = new
+        {
+            message = "Rate limit exceeded. Please try again later.",
+            retryAfter = context.Response.Headers["Retry-After"]
+        };
+        await context.Response.WriteAsJsonAsync(response);
+    }
+});
+
+app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();
 
