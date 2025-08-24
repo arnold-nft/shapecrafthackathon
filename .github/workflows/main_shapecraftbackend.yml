@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - shapecraftbackend
+name: Build and Deploy ASP.Net Core App to Azure Web App - shapecraftbackend
 
 permissions:
   id-token: write
@@ -9,41 +9,39 @@ on:
     branches:
       - main
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
-      - name: Build with dotnet
+      - name: Publish app
         working-directory: ./backend/Demo.ShapeCraftApi
-        run: dotnet build --configuration Release
+        run: dotnet publish -c Release -o ../../publish_output
 
-      - name: dotnet publish
-        working-directory: ./backend/Demo.ShapeCraftApi
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
-
-      - name: Upload artifact for deployment job
+      - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ./publish_output
 
   deploy:
     runs-on: windows-latest
     needs: build
     steps:
-      - name: Download artifact from build job
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+          path: ./publish_output
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -56,8 +54,4 @@ jobs:
         with:
           app-name: 'shapecraftbackend'
           slot-name: 'Production'
-          package: ./
-
-
-
-
+          package: ./publish_output
