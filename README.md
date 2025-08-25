@@ -6,6 +6,11 @@ This project was built during the **ShapeCraft Hackathon** to explore how **AI +
 
 ---
 
+## 🧑 Team
+
+* **X/Twitter: [arnold](https://x.com/Arnold_ETH)**
+* **DC: @arnold321**
+
 ## 🚀 Features
 
 * **Data ingestion pipeline**
